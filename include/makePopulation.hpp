@@ -6,6 +6,7 @@
 #include <numeric>
 #include <random>
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 struct City {
@@ -15,28 +16,17 @@ struct City {
 
 inline vector<vector<int>> makePopulation(int populationSize, int numberOfCities) {
     if (numberOfCities > 50) {
-        cerr << "The number of Cities must be less than 50" << endl;
-        return vector<vector<int>>();
+        cerr << "The number of Cities must be 50 or less" << endl;
+        return {};
     }
-
-    vector<vector<int>> population;
-    vector<int> antRoute(numberOfCities, 0);
-    iota(antRoute.begin(), antRoute.end(), 0);
 
     mt19937 rng{random_device{}()};
-    int maxAttempts = populationSize * 100; // prevent infinite loop
-    int attempts = 0;
+    uniform_int_distribution<int> dist(0, numberOfCities - 1);
 
-    while (population.size() < populationSize && attempts < maxAttempts) {
-        ranges::shuffle(antRoute, rng);
-        if (find(population.begin(), population.end(), antRoute) == population.end()) {
-            population.push_back(antRoute);
-        }
-        attempts++;
-    }
-
-    if (population.size() < populationSize) {
-        cerr << "Could not generate enough unique routes!" << endl;
+    vector<vector<int>> population;
+    for (int i = 0; i < populationSize; i++) {
+        int startCity = dist(rng);
+        population.push_back({startCity});
     }
 
     return population;
@@ -94,5 +84,6 @@ inline vector<City> cities = {
     {"Kirkenes",      6942, 3005},  // ~3,500
     {"Vadsø",         7006, 2940},  // ~5,000
 };
+
 
 #endif //MAKEPOPULATION_HPP
