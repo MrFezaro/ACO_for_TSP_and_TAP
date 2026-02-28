@@ -4,6 +4,10 @@ A C++ implementation of the Ant Colony Optimization (ACO) algorithm to solve the
 
 ---
 
+<p align="center">
+  <img src="aco_tsp.png" width="500"/>
+</p>
+
 ## Overview
 
 This project uses ACO to find the shortest possible route visiting all 50 Norwegian cities exactly once and returning to the starting point. Ants build routes probabilistically based on pheromone trails and distances, with shorter routes reinforcing their pheromone trails over generations.
@@ -100,4 +104,3 @@ Generation 500: Best distance = 9871
 Best route found: 0 4 16 10 6 21 12 14 15 ...
 Total distance: 8943
 ```
-![Route visualization](aco_tsp.png)
