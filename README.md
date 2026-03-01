@@ -2,8 +2,6 @@
 
 A C++ implementation of the Ant Colony Optimization (ACO) algorithm to solve the Travelling Salesman Problem (TSP) across 50 Norwegian cities, with a Python visualization script.
 
----
-
 <p align="center">
   <img src="aco_tsp.png" width="500"/>
 </p>
@@ -11,8 +9,6 @@ A C++ implementation of the Ant Colony Optimization (ACO) algorithm to solve the
 ## Overview
 
 This project uses ACO to find the shortest possible route visiting all 50 Norwegian cities exactly once and returning to the starting point. Ants build routes probabilistically based on pheromone trails and distances, with shorter routes reinforcing their pheromone trails over generations.
-
----
 
 ## How It Works
 
@@ -28,8 +24,6 @@ The pheromone update follows the standard ACO formula:
 $$\tau_{ij} = (1 - \rho)\tau_{ij} + \sum_{k=1}^{m} \Delta\tau_{ij}^k$$
 
 Where $\rho$ is the evaporation rate and $\Delta\tau_{ij}^k = 1/L_k$ for edges used by ant $k$.
-
----
 
 ## Configuration
 
@@ -49,8 +43,6 @@ float beta  = 5;            // distance weight (higher = more greedy)
 - Higher `alpha` = follows pheromones more strongly, can get stuck
 - Higher `rho` = pheromones evaporate faster, more exploration. Can be adjusted in travel.hpp
 
----
-
 ## Project Structure
 
 ```
@@ -59,8 +51,6 @@ float beta  = 5;            // distance weight (higher = more greedy)
 ├── travel.hpp             # Checks route distances and updates pheromone matrix
 └── draw_route.py          # Python visualization script
 ```
-
----
 
 ## Requirements
 
@@ -73,8 +63,6 @@ float beta  = 5;            // distance weight (higher = more greedy)
 pip install matplotlib
 ```
 
----
-
 ## Visualization
 
 Run the Python script and paste your route when prompted:
@@ -86,13 +74,9 @@ Enter route: 0 4 8 12 16 ...
 
 The route is drawn on a coordinate map of Norway with directional arrows colored from start to finish.
 
----
-
 ## Cities
 
 The dataset contains 50 of the largest Norwegian cities with approximate lat/lon coordinates.
-
----
 
 ## Example Output
 
