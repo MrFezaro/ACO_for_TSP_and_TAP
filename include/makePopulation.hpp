@@ -3,10 +3,8 @@
 
 #include <vector>
 #include <string>
-#include <numeric>
 #include <random>
 #include <iostream>
-#include <algorithm>
 using namespace std;
 
 struct City {
