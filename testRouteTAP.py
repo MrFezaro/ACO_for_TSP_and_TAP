@@ -36,19 +36,6 @@ while True:
     lines.append(line)
 
 assignments = []
-
-for line in lines:
-    if "->" not in line:
-        continue
-    left, right = line.split("->")
-    taxi_name = left.replace("Taxi", "").strip()
-    customer_name = right.replace("Customer", "").split("(")[0].strip()
-    print(f"'{taxi_name}' -> '{customer_name}'")
-    taxi = next((t for t in taxis if t[0] == taxi_name), None)
-    customer = next((c for c in customers if c[0] == customer_name), None)
-    print(f"  taxi found: {taxi}")
-    print(f"  customer found: {customer}")
-
 for line in lines:
     if "->" not in line:
         continue
@@ -63,31 +50,37 @@ for line in lines:
 print(f"Matched {len(assignments)} assignments")
 
 fig, ax = plt.subplots(figsize=(12, 8))
-cmap = plt.cm.tab10
+fig.patch.set_facecolor("#0d1b2a")
+ax.set_facecolor("#0d1b2a")
 
+cmap = plt.cm.tab10
 for i, (taxi, customer) in enumerate(assignments):
-    color = cmap(i / len(assignments))
+    color = cmap(i / max(len(assignments), 1))
     ax.annotate("", xy=(customer[2], customer[1]), xytext=(taxi[2], taxi[1]),
                 arrowprops=dict(arrowstyle="-|>", color=color, lw=1.8))
 
 for name, lat, lon in taxis:
-    ax.plot(lon, lat, 's', color="steelblue", markersize=10, zorder=4,
+    ax.plot(lon, lat, 's', color="#00aaff", markersize=10, zorder=4,
             markeredgecolor="white", markeredgewidth=0.8)
-    ax.text(lon + 0.001, lat, name, fontsize=7, color="steelblue")
+    ax.text(lon + 0.001, lat, name, fontsize=7, color="#00aaff")
 
 for name, lat, lon in customers:
-    ax.plot(lon, lat, 'o', color="tomato", markersize=10, zorder=4,
+    ax.plot(lon, lat, 'o', color="#ff6655", markersize=10, zorder=4,
             markeredgecolor="white", markeredgewidth=0.8)
-    ax.text(lon + 0.001, lat, name, fontsize=7, color="tomato")
+    ax.text(lon + 0.001, lat, name, fontsize=7, color="#ff6655")
 
-taxi_patch = mpatches.Patch(color="steelblue", label="Taxi stand")
-customer_patch = mpatches.Patch(color="tomato", label="Customer")
-ax.legend(handles=[taxi_patch, customer_patch], fontsize=9)
+taxi_patch = mpatches.Patch(color="#00aaff", label="Taxi stand")
+customer_patch = mpatches.Patch(color="#ff6655", label="Customer")
+ax.legend(handles=[taxi_patch, customer_patch], fontsize=9,
+          facecolor="#0d1b2a", edgecolor="#2a4a6a", labelcolor="white")
 
-ax.set_title("TAP - Taxi Assignment, Aalesund", fontsize=14)
-ax.set_xlabel("Longitude")
-ax.set_ylabel("Latitude")
-ax.grid(True, linestyle="--", alpha=0.4)
+ax.set_title("TAP - Taxi Assignment, Aalesund", fontsize=14, color="white", fontfamily="monospace")
+ax.set_xlabel("Longitude", color="#aaaaaa")
+ax.set_ylabel("Latitude", color="#aaaaaa")
+ax.tick_params(colors="#555555")
+ax.grid(True, linestyle="--", alpha=0.2, color="#aaaaaa")
+for spine in ax.spines.values():
+    spine.set_edgecolor("#1a3a5a")
 
 plt.tight_layout()
 plt.show()

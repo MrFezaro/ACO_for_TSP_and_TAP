@@ -47,10 +47,10 @@ int main() {
 
     } else { // Task Assignment Problem
         int n = 10;
-        int populationSize = 10;
+        int populationSize = 100;
         int maxGenerations = 100;
         float alpha = 1;
-        float beta = 1;
+        float beta = 5;
 
         auto costMatrix = makeAssignmentCostMatrix();
         auto pheromones = makePheromoneMatrix(n, 2.0);
