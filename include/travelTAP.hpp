@@ -115,7 +115,7 @@ inline void updatePheromonesTAP(vector<vector<double>>& pheromones,
                                  const vector<int>& bestAssignment,
                                  double bestScore,
                                  int n,
-                                 double rho = 0.5) {
+                                 double rho = 0.3) {
     // Evaporate
     for (auto& row : pheromones) {
         for (auto& p : row) {
